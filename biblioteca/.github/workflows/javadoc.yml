@@ -1,0 +1,149 @@
+/*
+ * Representa una biblioteca que almacena libros y controla
+ * su capacidad máxima y ocupación actual.
+ *
+ * Permite agregar y retirar libros, consultar el espacio
+ * disponible y obtener el porcentaje de ocupación.
+ *
+ * @author Ricardo Martin Fernandez
+ * @version 1.0
+ * @since 1.0
+ */
+package tablaEnteros;
+
+public class Biblioteca {
+
+    /** Nombre de la biblioteca. */
+    private String nombre;
+
+    /** Ciudad donde se encuentra la biblioteca. */
+    private String ciudad;
+
+    /** Capacidad máxima de libros que puede almacenar. */
+    private int capacidad;
+
+    /** Número actual de libros almacenados en la biblioteca. */
+    private int librosActuales;
+
+    /**
+     * Crea una nueva biblioteca.
+     *
+     * @param nombre nombre de la biblioteca
+     * @param ciudad ciudad donde se encuentra la biblioteca
+     * @param capacidad capacidad máxima de almacenamiento
+     */
+    public Biblioteca(String nombre, String ciudad, int capacidad) {
+        this.nombre = nombre;
+        this.ciudad = ciudad;
+        this.capacidad = capacidad;
+        this.librosActuales = 0;
+    }
+
+    /**
+     * Agrega una cantidad de libros a la biblioteca.
+     *
+     * @param cantidad cantidad de libros a agregar
+     * @return true si los libros se agregan correctamente,
+     *         false en caso contrario
+     */
+    public boolean agregarLibro(int cantidad) {
+        if (cantidad <= 0) {
+            return false;
+        }
+        if (librosActuales + cantidad > capacidad) {
+            return false;
+        }
+        librosActuales += cantidad;
+        return true;
+    }
+
+    /**
+     * Retira una cantidad de libros de la biblioteca.
+     *
+     * @param cantidad cantidad de libros a retirar
+     * @return true si los libros se retiran correctamente,
+     *         false en caso contrario
+     */
+    public boolean retirarLibro(int cantidad) {
+        if (cantidad <= 0 || cantidad > librosActuales) {
+            return false;
+        }
+        librosActuales -= cantidad;
+        return true;
+    }
+
+    /**
+     * Obtiene el espacio disponible en la biblioteca.
+     *
+     * @return número de espacios libres para almacenar libros
+     */
+    public int getEspacioDisponible() {
+        return capacidad - librosActuales;
+    }
+
+    /**
+     * Calcula el porcentaje de ocupación de la biblioteca.
+     *
+     * @return porcentaje de ocupación actual
+     */
+    public double getPorcentajeOcupacion() {
+        if (capacidad == 0) return 0.0;
+        return (librosActuales * 100.0) / capacidad;
+    }
+
+    /**
+     * Indica si la biblioteca está llena.
+     *
+     * @return true si la capacidad está completa,
+     *         false en caso contrario
+     */
+    public boolean estaLlena() {
+        return librosActuales >= capacidad;
+    }
+
+    /**
+     * Obtiene el nombre de la biblioteca.
+     *
+     * @return nombre de la biblioteca
+     */
+    public String getNombre() {
+        return nombre;
+    }
+
+    /**
+     * Obtiene la ciudad de la biblioteca.
+     *
+     * @return ciudad de la biblioteca
+     */
+    public String getCiudad() {
+        return ciudad;
+    }
+
+    /**
+     * Obtiene la capacidad máxima de la biblioteca.
+     *
+     * @return capacidad máxima de almacenamiento
+     */
+    public int getCapacidad() {
+        return capacidad;
+    }
+
+    /**
+     * Obtiene el número actual de libros almacenados.
+     *
+     * @return cantidad de libros actuales
+     */
+    public int getLibrosActuales() {
+        return librosActuales;
+    }
+
+    /**
+     * Devuelve una representación en texto de la biblioteca.
+     *
+     * @return información de la biblioteca en formato texto
+     */
+    @Override
+    public String toString() {
+        return nombre + " (" + ciudad + ") - " + librosActuales + "/" + capacidad + " libros";
+    }
+}
